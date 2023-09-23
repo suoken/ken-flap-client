@@ -26,13 +26,19 @@ const partsReducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
     case INCREMENT_PART: {
       const idx = state.findIndex(part => part.name === action.partName);
-      state[idx].amount += 1;
-      return state;
+      return [
+        ...state.slice(0, idx),
+        { ...state[idx], amount: state[idx].amount + 1},
+        ...state.slice(idx + 1)
+      ];
     }
     case DECREMENT_PART: {
       const idx = state.findIndex(part => part.name === action.partName);
-      state[idx].amount -= 1;
-      return state;
+      return [
+        ...state.slice(0, idx),
+        { ...state[idx], amount: state[idx].amount - 1 },
+        ...state.slice(idx + 1)
+      ];
     }
 
     default:
