@@ -18,6 +18,7 @@ interface School {
 interface Part {
   name: string;
   amount: number;
+  notes: string;
   id?: string;
 }
 
