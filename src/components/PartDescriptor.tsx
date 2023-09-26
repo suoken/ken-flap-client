@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const PartDescriptor = ({ name, amount }: { name: string; amount: number }) => {
   const [notes, setNotes] = useState('');
+
+  useEffect(() => {
+    setNotes('');
+  }, [name]);
   return (
     <div>
       <h3>Name: {name}</h3>
