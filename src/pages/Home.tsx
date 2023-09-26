@@ -41,6 +41,7 @@ const Home = () => {
             {part.name} {part.amount}
             <button
               onClick={e => {
+                e.stopPropagation();
                 dispatch(incrementPart(part.name));
               }}
             >
@@ -48,6 +49,7 @@ const Home = () => {
             </button>
             <button
               onClick={e => {
+                e.stopPropagation();
                 dispatch(decrementPart(part.name));
               }}
             >
