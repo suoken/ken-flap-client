@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PartDescriptor from '../components/PartDescriptor';
-import { decrementPart, incrementPart } from '../actions/parts';
+import { addPart, decrementPart, incrementPart } from '../actions/parts';
 import { partsSelector } from '../selectors/local';
 
 import './Home.sass';
@@ -9,12 +9,28 @@ import './Home.sass';
 const Home = () => {
   const [selectedPart, setSelectedPart] = useState<string>(null);
   const parts = useSelector(partsSelector);
+  const [newPartName, setNewPartName] = useState('');
   const dispatch = useDispatch();
+
+  const handleAddPart = () => {
+    if (newPartName.trim()) {
+      dispatch(addPart(newPartName.trim()));
+      setNewPartName('');
+    }
+  };
 
   return (
     <div>
       <h1>Parts Counter</h1>
       <hr />
+      <div className='addPartContainer'>
+        <input
+          value={newPartName}
+          onChange={e => setNewPartName(e.target.value)}
+          placeholder='Enter new part name'
+        />
+        <button onClick={handleAddPart}>Add Part</button>
+      </div>
       <ul className="partsList">
         {parts.map(part => (
           <li
