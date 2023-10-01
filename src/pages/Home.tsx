@@ -14,8 +14,15 @@ const Home = () => {
 
   const handleAddPart = () => {
     if (newPartName.trim()) {
-      dispatch(addPart(newPartName.trim()));
-      setNewPartName('');
+      const partExists = parts.some((part: Part) => part.name.toLowerCase() === newPartName.toLowerCase());
+
+      if (!partExists) {
+        dispatch(addPart(newPartName.trim()));
+        setNewPartName('');
+      } else {
+        alert('Part with this name already exists!');
+      }
+
     }
   };
 
